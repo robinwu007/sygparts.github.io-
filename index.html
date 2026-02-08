@@ -87,18 +87,20 @@
         .brand-card:hover { filter: brightness(1.2); transform: scale(1.05); }
         .brand-card i { font-size: 2.5rem; margin-bottom: 10px; opacity: 0.8; }
 
+        /* 修改：重构联系区域样式 */
         .inquiry-section { padding: 80px 5%; background: white; }
         .inquiry-container { 
-            max-width: 1000px; margin: 0 auto; background: var(--dark); border-radius: 15px; 
-            display: flex; overflow: hidden; box-shadow: var(--shadow);
+            max-width: 900px; margin: 0 auto; background: var(--dark); border-radius: 15px; 
+            padding: 60px; text-align: center; color: white; box-shadow: var(--shadow);
         }
-        .inquiry-info { padding: 50px; flex: 1; color: white; }
-        .inquiry-form { padding: 50px; flex: 1.2; background: #fff; }
+        .contact-methods { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 40px; }
+        .contact-card { flex: 1; min-width: 250px; padding: 30px; background: rgba(255,255,255,0.05); border-radius: 10px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); }
+        .contact-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-5px); }
+        .contact-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
+        .contact-card h4 { font-size: 1.2rem; margin-bottom: 10px; color: white; }
+        .contact-card a { color: #cbd5e1; text-decoration: none; font-size: 1.1rem; transition: 0.3s; }
+        .contact-card a:hover { color: var(--secondary); }
         
-        input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
-        .file-label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 13px; color: var(--primary); }
-        
-        /* 侧边固定社媒推广条 */
         .social-sticky {
             position: fixed; left: 20px; top: 50%; transform: translateY(-50%);
             display: flex; flex-direction: column; gap: 15px; z-index: 900;
@@ -110,7 +112,6 @@
         }
         .social-icon:hover { background: var(--secondary); color: white; }
 
-        /* 右下角浮动联系组 - 新增WeChat */
         .float-contact-group {
             position: fixed; bottom: 30px; right: 30px;
             display: flex; flex-direction: column; gap: 15px; z-index: 1000;
@@ -124,9 +125,8 @@
         .float-btn:hover { transform: scale(1.1); }
         .whatsapp-btn { background-color: #25d366; }
         .wechat-btn { background-color: #09b83e; position: relative; cursor: pointer; }
-        /* 微信账号浮窗 */
         .wechat-btn:hover::before {
-            content: "WeChat ID: sygauto"; /* sygauto */
+            content: "WeChat ID: sygauto"; 
             position: absolute; right: 75px; top: 50%; transform: translateY(-50%);
             background: white; color: #333; padding: 8px 15px; border-radius: 5px;
             font-size: 14px; font-weight: bold; white-space: nowrap; box-shadow: var(--shadow);
@@ -136,8 +136,8 @@
         
         @media (max-width: 768px) {
             .hero-content h2 { font-size: 2.2rem; }
-            .inquiry-container { flex-direction: column; }
             nav { display: none; }
+            .inquiry-container { padding: 40px 20px; }
         }
     </style>
 </head>
@@ -151,7 +151,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#supply-chain">Solutions</a></li>
                     <li><a href="#brands">Brands</a></li>
-                    <li><a href="#contact">Inquiry</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -168,7 +168,7 @@
             <h2>Your <span>Ultimate Hub</span> for China's Auto Parts</h2>
             <p>Integrating full supply chain resources for European, American, Japanese, Korean, and Chinese vehicles. One-stop solution, zero hassle.</p>
             <div class="btn-group">
-                <a href="#contact" class="btn btn-primary">Start Sourcing Now</a>
+                <a href="#contact" class="btn btn-primary">Get A Quote Now</a>
                 <a href="#supply-chain" class="btn btn-outline">Our Solutions</a>
             </div>
         </div>
@@ -215,25 +215,20 @@
 
     <section id="contact" class="inquiry-section">
         <div class="inquiry-container">
-            <div class="inquiry-info">
-                <h4>Get a Professional Quote</h4>
-                <p style="margin-top:20px; opacity:0.8;">Send us your OE numbers or vehicle models. Our team will provide a comprehensive solution within 24 hours.</p>
-                <div style="margin-top:40px;">
-                    <p><i class="fas fa-envelope" style="margin-right:10px;"></i> info@sygparts.com</p>
-                    <p style="margin-top:15px;"><i class="fas fa-map-marker-alt" style="margin-right:10px;"></i> Ningbo,Zhejiang,China</p>
+            <h3 style="font-size: 2.2rem; margin-bottom: 15px;">Get In Touch</h3>
+            <p style="opacity: 0.8; max-width: 600px; margin: 0 auto;">Skip the forms. Send us your OE numbers or inquiry list directly via email or social media. We will respond within 24 hours.</p>
+            
+            <div class="contact-methods">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email Inquiry</h4>
+                    <a href="mailto:info@sygparts.com">info@sygparts.com</a>
                 </div>
-            </div>
-            <div class="inquiry-form">
-                <form action="https://formspree.io/f/你的ID" method="POST" enctype="multipart/form-data">
-                    <input type="text" name="name" placeholder="Your Name / Company *" required>
-                    <input type="email" name="email" placeholder="Email Address *" required>
-                    <textarea name="message" rows="4" placeholder="Inquiry List (OE Numbers, Car Models, Quantity...)"></textarea>
-                    
-                    <label class="file-label">Attachment (Inquiry List / Photos):</label>
-                    <input type="file" name="upload" style="border:none; padding-left:0; margin-bottom:20px;">
-                    
-                    <button type="submit" class="btn btn-primary" style="width:100%;">Submit Inquiry</button>
-                </form>
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Office Location</h4>
+                    <a href="#">Ningbo, Zhejiang, China</a>
+                </div>
             </div>
         </div>
     </section>
